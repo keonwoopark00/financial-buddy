@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Dropdown from 'react-dropdown';
-import { Container, Form, InputGroup } from 'react-bootstrap';
+import { Container, Form } from 'react-bootstrap';
+import BsInputPrepend from '../components/Bootstraps/BsInputPrepend';
 
 const taxesPerProvince = {
     'Alberta': 1.05,
@@ -47,45 +48,25 @@ const Tax = () => {
 
     return (
         <Container>
-            <h1 class="heading display-5 pb-3 text-center">Tax Calculator</h1>
+            <h1 className="heading display-5 pb-3 text-center">Tax Calculator</h1>
             <Form>
-                <Form.Group>
-                    <InputGroup>
-                        <InputGroup.Prepend>
-                            <InputGroup.Text id="basic-addon1">$</InputGroup.Text>
-                        </InputGroup.Prepend>
-                        <Form.Control type="number" value={originalAmount} placeholder="Total Bill" onChange={amountChangedHandler} />
-                    </InputGroup>
-                </Form.Group>
-                <Form.Group>
-                    <InputGroup>
-                        <InputGroup.Prepend>
-                            <InputGroup.Text id="basic-addon1">Provinces</InputGroup.Text>
-                        </InputGroup.Prepend>
-                        <Dropdown onChange={dropdownSelectedHandler} options={options} placeholder="Choose a province..." />
-                    </InputGroup>
-                </Form.Group>
+                <BsInputPrepend prependText="$">
+                    <Form.Control type="number" value={originalAmount} placeholder="Total Bill" onChange={amountChangedHandler} />
+                </BsInputPrepend>
+                <BsInputPrepend prependText="Provinces">
+                    <Dropdown onChange={dropdownSelectedHandler} options={options} placeholder="Choose a province..." />
+                </BsInputPrepend>
             </Form>
             <hr />
             {!(total === null || province === null) &&
                 <div className="pt-4">
                     <h3 className="text-center">Results</h3>
-                    <Form.Group>
-                        <InputGroup>
-                            <InputGroup.Prepend>
-                                <InputGroup.Text id="basic-addon1">Tax Amount</InputGroup.Text>
-                            </InputGroup.Prepend>
-                            <Form.Control type="number" value={taxAmount.toFixed(2)} disabled />
-                        </InputGroup>
-                    </Form.Group>
-                    <Form.Group>
-                        <InputGroup>
-                            <InputGroup.Prepend>
-                                <InputGroup.Text id="basic-addon1">Total Amount</InputGroup.Text>
-                            </InputGroup.Prepend>
-                            <Form.Control type="number" value={total.toFixed(2)} disabled />
-                        </InputGroup>
-                    </Form.Group>
+                    <BsInputPrepend prependText="Tax Amount">
+                        <Form.Control type="number" value={taxAmount.toFixed(2)} disabled />
+                    </BsInputPrepend>
+                    <BsInputPrepend prependText="Total Amount">
+                        <Form.Control type="number" value={total.toFixed(2)} disabled />
+                    </BsInputPrepend>
                 </div>
             }
         </Container>

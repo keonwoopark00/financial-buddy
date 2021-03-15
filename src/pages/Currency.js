@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import useCurrencyApi from '../hooks/useCurrencyApi';
 import Dropdown from 'react-dropdown';
-import { Container, Form, InputGroup } from 'react-bootstrap';
+import { Container, Form } from 'react-bootstrap';
+import BsInputPrepend from '../components/Bootstraps/BsInputPrepend';
+import BsFormGroup from '../components/Bootstraps/BsFormGroup';
 import 'react-dropdown/style.css';
 
 const Currency = () => {
@@ -37,24 +39,16 @@ const Currency = () => {
     return (
         <Container>
             <h1 className="heading display-5 pb-3 text-center">Currency Exchanger</h1>
-            <Form.Group>
-                <InputGroup className="mb-3">
-                    <InputGroup.Prepend>
-                        <InputGroup.Text id="basic-addon1">USD</InputGroup.Text>
-                    </InputGroup.Prepend>
-                    <Form.Control type="number" onChange={inputEventHandler} placeholder="0" />
-                </InputGroup>
-            </Form.Group>
-            <Form.Group>
+            <BsInputPrepend prependText="USD">
+                <Form.Control type="number" onChange={inputEventHandler} placeholder="0" />
+            </BsInputPrepend>
+            <BsFormGroup>
                 <Dropdown onChange={dropdownSelectedHandler} options={options} placeholder="Select a currency" />
-            </Form.Group>
+            </BsFormGroup>
             { result !== null &&
-                <InputGroup>
-                    <InputGroup.Prepend>
-                        <InputGroup.Text id="basic-addon1">{cur}</InputGroup.Text>
-                    </InputGroup.Prepend>
+                <BsInputPrepend prependText={cur}>
                     <Form.Control type="number" value={result.toFixed(2)} disabled />
-                </InputGroup>
+                </BsInputPrepend>
             }
         </Container>
     );

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Container, InputGroup, Form, FormControl } from 'react-bootstrap';
 import classes from './Tip.Module.css';
+import { Container, InputGroup, Form, FormControl } from 'react-bootstrap';
+import BsFormGroup from '../components/Bootstraps/BsFormGroup';
+import BsInputPrepend from '../components/Bootstraps/BsInputPrepend';
 
 const Tip = () => {
     const [amount, setAmount] = useState(0);
@@ -28,15 +30,10 @@ const Tip = () => {
         <Container>
             <h1 className="heading display-5 pb-3 text-center">Tip Calculator</h1>
             <Form>
-                <Form.Group>
-                    <InputGroup className="mb-3">
-                        <InputGroup.Prepend>
-                            <InputGroup.Text id="basic-addon1">$</InputGroup.Text>
-                        </InputGroup.Prepend>
-                        <FormControl type="number" placeholder="Total Bill" onChange={numberEnteredHandler} />
-                    </InputGroup>
-                </Form.Group>
-                <Form.Group>
+                <BsInputPrepend prependText="$">
+                    <FormControl type="number" placeholder="Total Bill" onChange={numberEnteredHandler} />
+                </BsInputPrepend>
+                <BsFormGroup>
                     <InputGroup className="mb-3">
                         <Form.Label>Tip:</Form.Label>
                         <FormControl type="range" value={tipPercent} onChange={tipSelectedHandler} />
@@ -46,28 +43,18 @@ const Tip = () => {
                             </InputGroup.Append>
                         }
                     </InputGroup>
-                </Form.Group> 
+                </BsFormGroup> 
             </Form>
 
             <hr />
             <div className={resultClass}>
                 <h3 className="text-center">Results</h3>
-                <Form.Group>
-                    <InputGroup>
-                        <InputGroup.Prepend>
-                            <InputGroup.Text id="basic-addon1">Tip amount</InputGroup.Text>
-                        </InputGroup.Prepend>
-                        <FormControl type="number" value={tipAmount} disabled />
-                    </InputGroup>
-                </Form.Group>
-                <Form.Group>
-                    <InputGroup>
-                        <InputGroup.Prepend>
-                            <InputGroup.Text id="basic-addon1">Total amount with tip</InputGroup.Text>
-                        </InputGroup.Prepend>
-                        <FormControl type="number" value={totalAmount} disabled />
-                    </InputGroup>
-                </Form.Group>
+                <BsInputPrepend prependText="Tip amount">
+                    <FormControl type="number" value={tipAmount} disabled />
+                </BsInputPrepend>
+                <BsInputPrepend prependText="Total amount with tip">
+                    <FormControl type="number" value={totalAmount} disabled />
+                </BsInputPrepend>
             </div>
         </Container>
     );
